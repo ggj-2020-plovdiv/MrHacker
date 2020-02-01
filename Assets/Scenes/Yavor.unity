@@ -450,6 +450,8 @@ MonoBehaviour:
   targetCursor: {fileID: 2800000, guid: 311d5431f3a501e4aa3691e9abd6dcfc, type: 3}
   throwablesGO:
   - {fileID: 526912952970902766, guid: 86b61a800d237744898a3e4bb2ed25b6, type: 3}
+  go: {fileID: 0}
+  selectedThrowable: 0
 --- !u!1 &902929641
 GameObject:
   m_ObjectHideFlags: 0
