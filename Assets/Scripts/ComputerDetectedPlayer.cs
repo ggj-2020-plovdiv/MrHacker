@@ -19,7 +19,6 @@ public class ComputerDetectedPlayer : MonoBehaviour
 
     private void OnTriggerStay2D()
     {
-        Debug.Log("Player is on computer!");
         Debug.Log("Press \"F\" to hack the computer...");
         if (Input.GetKeyDown("f") )
         {

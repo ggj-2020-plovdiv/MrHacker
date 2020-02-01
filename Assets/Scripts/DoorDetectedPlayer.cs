@@ -26,7 +26,7 @@ public class DoorDetectedPlayer : MonoBehaviour
         Debug.Log("Enter \"y\" to open the door.");
         if (Input.GetKeyDown("y"))
         {
-            player.transform.position = new Vector2(door2.transform.position.x, door2.transform.position.y);
+            player.transform.position = new Vector2(door2.transform.position.x, door2.transform.position.y - 2.3f);
         }
     }
 }
