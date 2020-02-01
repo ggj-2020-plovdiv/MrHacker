@@ -17,8 +17,20 @@ public class GuardBehaviour : MonoBehaviour
 
     private int currentPoint = 0;
 
+    private float timeLastAttacked;
+    private float attackCooldown = 1f;
+
+    public bool facingLeft = false;
+    public bool facingRight = true;
+
+    public bool stunned = false;
+    public float timeStunned;
+    private float stunLenght = 2f;
+
     void Start()
     {
+        timeLastAttacked = Time.time;
+
         player = GameObject.FindWithTag("Player");
         foreach (var point in GameObject.FindGameObjectsWithTag("PatrolPoint"))
         {
@@ -28,9 +40,20 @@ public class GuardBehaviour : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!chasing)
+
+        if (!stunned)
         {
-            Patrol();
+            if (!chasing)
+            {
+                Patrol();
+            }
+        }
+        else
+        {
+            if (timeStunned + stunLenght < Time.time)
+            {
+                stunned = false;
+            }
         }
     }
 
@@ -46,10 +69,14 @@ public class GuardBehaviour : MonoBehaviour
             if (pos.x > transform.position.x)
             {
                 transform.rotation = Quaternion.Euler(0, 0, -180);
+                facingLeft = true;
+                facingRight = false;
             }
             else
             {
                 transform.rotation = Quaternion.Euler(0, 0, 0);
+                facingLeft = false;
+                facingRight = true;
             }
         }
         else
@@ -71,10 +98,17 @@ public class GuardBehaviour : MonoBehaviour
         if (dist < 0.6)
         {
             attacking = true;
+            player.GetComponent<PlayerController>().canMove = false;
+            if (timeLastAttacked + attackCooldown < Time.time)
+            {
+                player.GetComponent<PlayerController>().health -= 10;
+                timeLastAttacked = Time.time;
+            }
         }
         else
         {
             attacking = false;
+            player.GetComponent<PlayerController>().canMove = true;
         }
 
         if (!attacking)
