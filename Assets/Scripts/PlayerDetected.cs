@@ -33,7 +33,7 @@ public class PlayerDetected : MonoBehaviour
         if (collision.tag == "Player")
         {
             SendMessageUpwards("CheckForDirChange");
-            parent.GetComponent<GuardBehaviour>().chasing = false;
+            //parent.GetComponent<GuardBehaviour>().chasing = false;
         }
     }
 }
