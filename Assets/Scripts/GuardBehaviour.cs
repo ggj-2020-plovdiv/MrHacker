@@ -40,7 +40,16 @@ public class GuardBehaviour : MonoBehaviour
         var distanceToPoint = Vector2.Distance(transform.position, point.transform.position);
         if (distanceToPoint > 0.1)
         {
+            var pos = transform.position;
             transform.position = Vector2.MoveTowards(transform.position, point.transform.position, 1f * Time.deltaTime);
+            if (pos.x > transform.position.x)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, -180);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
         }
         else
         {
@@ -63,7 +72,7 @@ public class GuardBehaviour : MonoBehaviour
     void CheckForDirChange()
     {
         var dist = Vector2.Distance(transform.position, player.transform.position);
-        if (dist < 2f)
+        if (dist < 1f)
         {
             transform.Rotate(0, 0, 180);
         }
