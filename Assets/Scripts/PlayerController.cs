@@ -24,9 +24,17 @@ public class PlayerController : MonoBehaviour
 
     public bool hiding = false;
 
+    GameObject go;
+
+    public Animator anim;
+
     void Start()
     {
         player = GetComponent<Transform>();
+
+        anim = gameObject.GetComponentInChildren<Animator>();
+
+        go = this.gameObject;
     }
 
     void FixedUpdate()
@@ -44,10 +52,18 @@ public class PlayerController : MonoBehaviour
         {
             healthText.text = $"Health: {health}";
         }
+        else
+        {
+            healthText = GameObject.Find("HealthText").GetComponent<Text>();
+        }
 
         if (ammoText != null)
         {
             ammoText.text = $"Vases: {ammo}";
+        }
+        else
+        {
+            ammoText = GameObject.Find("AmmoText").GetComponent<Text>();
         }
 
         Hide();
@@ -55,6 +71,8 @@ public class PlayerController : MonoBehaviour
 
     private void Hide()
     {
+        //anim.SetBool("hiding", hiding);
+
         if (hiding)
         {
             gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, -50);
@@ -75,21 +93,46 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
+
         if (Input.GetKey("w"))
         {
             player.Translate(Vector2.up * verticalSpeed, Space.World);
+            anim.SetBool("walking", true);
         }
         if (Input.GetKey("s"))
         {
             player.Translate(Vector2.down * verticalSpeed, Space.World);
+            anim.SetBool("walking", true);
         }
         if (Input.GetKey("a"))
         {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
             player.Translate(Vector2.left * horizontalSpeed, Space.World);
+            anim.SetBool("walking", true);
         }
         if (Input.GetKey("d"))
         {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
             player.Translate(Vector2.right * horizontalSpeed, Space.World);
+            anim.SetBool("walking", true);
+        }
+
+        
+        if (Input.GetKeyUp("w"))
+        {
+            anim.SetBool("walking", false);
+        }
+        if (Input.GetKeyUp("s"))
+        {
+            anim.SetBool("walking", false);
+        }
+        if (Input.GetKeyUp("a"))
+        {
+            anim.SetBool("walking", false);
+        }
+        if (Input.GetKeyUp("d"))
+        {
+            anim.SetBool("walking", false);
         }
     }
 

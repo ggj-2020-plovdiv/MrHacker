@@ -36,6 +36,7 @@ public class HidingSpot : MonoBehaviour
         {
             if (Input.GetKeyDown("f"))
             {
+                player = GameObject.FindGameObjectWithTag("Player");
                 player.GetComponent<PlayerController>().hiding = !player.GetComponent<PlayerController>().hiding;
             }
         }

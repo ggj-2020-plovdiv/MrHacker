@@ -22,8 +22,8 @@ public class DoorDetectedPlayer : MonoBehaviour
 
     private void OnTriggerStay2D()
     {
-        Debug.Log("Player in front of the door.");
-        Debug.Log("Enter \"y\" to open the door.");
+        //Debug.Log("Player in front of the door.");
+        //Debug.Log("Enter \"y\" to open the door.");
         if (Input.GetKeyDown("y"))
         {
             player.transform.position = new Vector2(door2.transform.position.x, door2.transform.position.y - 2.3f);
