@@ -27,6 +27,11 @@ public class MiniPuzzle : MonoBehaviour, IPointerClickHandler
 
     void Update()
     {
+        if (manager == null)
+        {
+            manager = GameObject.FindGameObjectWithTag("Manager").GetComponent<_boardManager>();
+        }
+
         if (images.All(x => (int)x.gameObject.GetComponent<RectTransform>().rotation.eulerAngles.z == 0))
         {
             manager.puzzleTwoComplete = true;

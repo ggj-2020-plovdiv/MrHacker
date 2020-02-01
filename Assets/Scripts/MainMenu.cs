@@ -20,13 +20,11 @@ public class MainMenu : MonoBehaviour
 
     public void EnterInTheGame()
     {
-        Debug.Log("cukna sa");
-        SceneManager.LoadScene("Dechko");
+        SceneManager.LoadScene("Level1-Floor1");
     }
 
     public void ExitGame()
     {
-        Debug.Log("Exitwaaa saaaa");
         Application.Quit();
     }
 }

@@ -10,15 +10,19 @@ public class Throwable : MonoBehaviour
 
     public bool selectedThrowable = false;
 
-    private GameObject player;
+    public GameObject player;
 
     public GameObject shootPrompt;
     public GameObject outOfAmmoPrompt;
+
+    Animator playerAnimator;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         shootPrompt.SetActive(false);
+
+        playerAnimator = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -44,6 +48,7 @@ public class Throwable : MonoBehaviour
                 Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
                 player.GetComponent<PlayerController>().ammo--;
                 shootPrompt.SetActive(false);
+                playerAnimator.Play("hacker_throw");
             }
             else if (Input.GetButtonDown("Fire2"))
             {
@@ -54,6 +59,7 @@ public class Throwable : MonoBehaviour
             }
         }
 
+        player = GameObject.FindGameObjectWithTag("Player");
         if (player.GetComponent<PlayerController>().ammo <= 0)
         {
             outOfAmmoPrompt.SetActive(true);

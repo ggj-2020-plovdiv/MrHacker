@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class _boardManager : MonoBehaviour
@@ -13,13 +14,26 @@ public class _boardManager : MonoBehaviour
     private Image puzzleTwoIcon;
     private Image puzzleThreeIcon;
 
+    public GameObject canvas;
+    public GameObject playerPrefab;
+
+    private GameObject spawn;
+    private GameObject cam;
+
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);
     }
 
+    private void OnLevelWasLoaded(int level)
+    {
+        Instantiate(canvas, transform.position, Quaternion.identity);
+    }
+
     void Update()
     {
+        
+
         if (puzzleOneComplete)
         {
             puzzleOneIcon = GameObject.Find("Task1").GetComponent<Image>();

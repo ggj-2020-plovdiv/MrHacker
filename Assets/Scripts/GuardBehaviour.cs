@@ -29,15 +29,13 @@ public class GuardBehaviour : MonoBehaviour
 
     public int health;
 
+    public Animator anim;
+
     void Start()
     {
         timeLastAttacked = Time.time;
 
         player = GameObject.FindWithTag("Player");
-        foreach (var point in GameObject.FindGameObjectsWithTag("PatrolPoint"))
-        {
-            patrolPoints.Add(point);
-        }
     }
 
     void FixedUpdate()
@@ -47,6 +45,7 @@ public class GuardBehaviour : MonoBehaviour
         {
             if (!chasing)
             {
+                anim.SetBool("catched", false);
                 Patrol();
             }
         }
@@ -55,6 +54,12 @@ public class GuardBehaviour : MonoBehaviour
             if (timeStunned + stunLenght < Time.time)
             {
                 stunned = false;
+                anim.SetBool("stunned", false);
+            }
+            else
+            {
+                anim.SetBool("stunned", true);
+                anim.SetBool("catched", false);
             }
         }
 
@@ -75,7 +80,7 @@ public class GuardBehaviour : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, point.transform.position, patrolSpeed * Time.deltaTime);
             if (pos.x > transform.position.x)
             {
-                transform.rotation = Quaternion.Euler(0, 0, -180);
+                transform.rotation = Quaternion.Euler(0, 180, 0);
                 facingLeft = true;
                 facingRight = false;
             }
@@ -101,10 +106,16 @@ public class GuardBehaviour : MonoBehaviour
 
     void ChasePlayer()
     {
+        if (player == null)
+        {
+            player = GameObject.FindWithTag("Player");
+        }
+
         var dist = Vector2.Distance(transform.position, player.transform.position);
-        if (dist < 0.6)
+        if (dist < 0.6f)
         {
             attacking = true;
+            anim.SetBool("catched", true);
             player.GetComponent<PlayerController>().canMove = false;
             if (timeLastAttacked + attackCooldown < Time.time)
             {
