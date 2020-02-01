@@ -7,6 +7,7 @@ public class PlayerDetected : MonoBehaviour
     public float rotationSpeed;
 
     private GameObject player;
+    public GameObject parent;
 
     void Start()
     {
@@ -22,6 +23,7 @@ public class PlayerDetected : MonoBehaviour
         if (collision.tag == "Player")
         {
             SendMessageUpwards("ChasePlayer");
+            parent.GetComponent<GuardBehaviour>().chasing = true;
         }
     }
 
@@ -30,6 +32,7 @@ public class PlayerDetected : MonoBehaviour
         if (collision.tag == "Player")
         {
             SendMessageUpwards("CheckForDirChange");
+            parent.GetComponent<GuardBehaviour>().chasing = false;
         }
     }
 }
