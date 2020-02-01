@@ -27,6 +27,8 @@ public class GuardBehaviour : MonoBehaviour
     public float timeStunned;
     private float stunLenght = 2f;
 
+    public int health;
+
     void Start()
     {
         timeLastAttacked = Time.time;
@@ -54,6 +56,11 @@ public class GuardBehaviour : MonoBehaviour
             {
                 stunned = false;
             }
+        }
+
+        if (health <= 0)
+        {
+            Destroy(this.gameObject);
         }
     }
 
