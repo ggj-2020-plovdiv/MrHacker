@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,15 +9,52 @@ public class GuardBehaviour : MonoBehaviour
 
     private GameObject player;
 
+    public List<GameObject> patrolPoints;
+    public bool chasing = false;
+    GameObject nextPoint;
+
+    private bool foundAllPoints = false;
+    private int currentPoint = 0;
+
     void Start()
     {
         player = GameObject.FindWithTag("Player");
+        foreach (var point in GameObject.FindGameObjectsWithTag("PatrolPoint"))
+        {
+            patrolPoints.Add(point);
+        }
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        
+        if (!chasing)
+        {
+            Patrol();
+        }
     }
+
+    void Patrol()
+    {
+        var pointsFromListToArray = patrolPoints.ToArray();
+        var point = pointsFromListToArray[currentPoint];
+        var distanceToPoint = Vector2.Distance(transform.position, point.transform.position);
+        if (distanceToPoint > 0.1)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, point.transform.position, 1f * Time.deltaTime);
+        }
+        else
+        {
+            if (currentPoint < pointsFromListToArray.Length - 1)
+            {
+                currentPoint++;
+            }
+            else
+            {
+                currentPoint = 0;
+            }
+        }
+    }
+
     void ChasePlayer()
     {
         transform.position = Vector2.MoveTowards(transform.position, player.transform.position, 1f * Time.deltaTime);

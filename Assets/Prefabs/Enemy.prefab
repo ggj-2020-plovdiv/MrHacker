@@ -121,6 +121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 150fcedae2a8b8f44b0155d21c968be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationSpeed: 0
+  parent: {fileID: 2433376335516169590}
 --- !u!50 &1281595403
 Rigidbody2D:
   serializedVersion: 4
@@ -236,3 +238,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73062009112d0b54ba5b3109182b7033, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 1
+  patrolPoints: []
