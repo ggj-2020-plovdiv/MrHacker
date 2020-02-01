@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,6 +22,8 @@ public class PlayerController : MonoBehaviour
     private int timesRightMoved = 0;
     private int timesRequredToMoveToBreakStun = 5;
 
+    public bool hiding = false;
+
     void Start()
     {
         player = GetComponent<Transform>();
@@ -30,64 +33,11 @@ public class PlayerController : MonoBehaviour
     {
         if (canMove)
         {
-            if (Input.GetKey("w"))
-            {
-                player.Translate(Vector2.up * verticalSpeed, Space.World);
-            }
-            if (Input.GetKey("s"))
-            {
-                player.Translate(Vector2.down * verticalSpeed, Space.World);
-            }
-            if (Input.GetKey("a"))
-            {
-                player.Translate(Vector2.left * horizontalSpeed, Space.World);
-            }
-            if (Input.GetKey("d"))
-            {
-                player.Translate(Vector2.right * horizontalSpeed, Space.World);
-            }
+            Move();
         }
         else
         {
-            if (Input.GetKeyDown("o"))
-            {
-                timesLeftMoved++;
-                    
-            }
-            if (Input.GetKeyDown("p"))
-            {
-                timesRightMoved++;
-            }
-
-            if (timesLeftMoved >= timesRequredToMoveToBreakStun && timesRightMoved >= timesRequredToMoveToBreakStun)
-            {
-                canMove = true;
-                timesLeftMoved = 0;
-                timesRightMoved = 0;
-                var enemies = GameObject.FindGameObjectsWithTag("Enemy");
-                var distanse = Mathf.Infinity;
-                GameObject closestEnemy = null;
-                foreach (var enemy in enemies)
-                {
-                    var diff = enemy.transform.position - transform.position;
-                    float currDistance = diff.sqrMagnitude;
-                    if (currDistance < distanse)
-                    {
-                        closestEnemy = enemy;
-                        distanse = currDistance;
-                    }
-                }
-                if (closestEnemy.GetComponent<GuardBehaviour>().facingLeft)
-                {
-                    closestEnemy.transform.position = new Vector2(closestEnemy.transform.position.x + 1, closestEnemy.transform.position.y);
-                }
-                else if (closestEnemy.GetComponent<GuardBehaviour>().facingRight)
-                {
-                    closestEnemy.transform.position = new Vector2(closestEnemy.transform.position.x - 1, closestEnemy.transform.position.y);
-                }
-                closestEnemy.GetComponent<GuardBehaviour>().timeStunned = Time.time;
-                closestEnemy.GetComponent<GuardBehaviour>().stunned = true;
-            }
+            BreakStun();
         }
 
         if (healthText != null)
@@ -97,7 +47,92 @@ public class PlayerController : MonoBehaviour
 
         if (ammoText != null)
         {
-            ammoText.text = $"Ammo: {ammo}";
+            ammoText.text = $"Vases: {ammo}";
+        }
+
+        Hide();
+    }
+
+    private void Hide()
+    {
+        if (hiding)
+        {
+            gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, -50);
+            gameObject.layer = 4;
+            canMove = false;
+            if (Input.GetKeyDown("f"))
+            {
+                player.GetComponent<PlayerController>().hiding = !player.GetComponent<PlayerController>().hiding;
+            }
+        }
+        else if (!hiding)
+        {
+            gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+            gameObject.layer = 0;
+            canMove = true;
+        }
+    }
+
+    private void Move()
+    {
+        if (Input.GetKey("w"))
+        {
+            player.Translate(Vector2.up * verticalSpeed, Space.World);
+        }
+        if (Input.GetKey("s"))
+        {
+            player.Translate(Vector2.down * verticalSpeed, Space.World);
+        }
+        if (Input.GetKey("a"))
+        {
+            player.Translate(Vector2.left * horizontalSpeed, Space.World);
+        }
+        if (Input.GetKey("d"))
+        {
+            player.Translate(Vector2.right * horizontalSpeed, Space.World);
+        }
+    }
+
+    private void BreakStun()
+    {
+        if (Input.GetKeyDown("o"))
+        {
+            timesLeftMoved++;
+
+        }
+        if (Input.GetKeyDown("p"))
+        {
+            timesRightMoved++;
+        }
+
+        if (timesLeftMoved >= timesRequredToMoveToBreakStun && timesRightMoved >= timesRequredToMoveToBreakStun)
+        {
+            canMove = true;
+            timesLeftMoved = 0;
+            timesRightMoved = 0;
+            var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            var distanse = Mathf.Infinity;
+            GameObject closestEnemy = null;
+            foreach (var enemy in enemies)
+            {
+                var diff = enemy.transform.position - transform.position;
+                float currDistance = diff.sqrMagnitude;
+                if (currDistance < distanse)
+                {
+                    closestEnemy = enemy;
+                    distanse = currDistance;
+                }
+            }
+            if (closestEnemy.GetComponent<GuardBehaviour>().facingLeft)
+            {
+                closestEnemy.transform.position = new Vector2(closestEnemy.transform.position.x + 1, closestEnemy.transform.position.y);
+            }
+            else if (closestEnemy.GetComponent<GuardBehaviour>().facingRight)
+            {
+                closestEnemy.transform.position = new Vector2(closestEnemy.transform.position.x - 1, closestEnemy.transform.position.y);
+            }
+            closestEnemy.GetComponent<GuardBehaviour>().timeStunned = Time.time;
+            closestEnemy.GetComponent<GuardBehaviour>().stunned = true;
         }
     }
 }
