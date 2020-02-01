@@ -448,6 +448,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetCursor: {fileID: 2800000, guid: 311d5431f3a501e4aa3691e9abd6dcfc, type: 3}
+  throwablesGO:
+  - {fileID: 526912952970902766, guid: 86b61a800d237744898a3e4bb2ed25b6, type: 3}
 --- !u!1 &902929641
 GameObject:
   m_ObjectHideFlags: 0
@@ -1152,26 +1154,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5057665900007905376, guid: 4b33c5c1b2b6c2a438e02b01b614a220,
-        type: 3}
-      propertyPath: m_Offset.x
-      value: 0.014870437
-      objectReference: {fileID: 0}
-    - target: {fileID: 5057665900007905376, guid: 4b33c5c1b2b6c2a438e02b01b614a220,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: -0.0025457442
-      objectReference: {fileID: 0}
-    - target: {fileID: 5057665900007905376, guid: 4b33c5c1b2b6c2a438e02b01b614a220,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 0.21073878
-      objectReference: {fileID: 0}
-    - target: {fileID: 5057665900007905376, guid: 4b33c5c1b2b6c2a438e02b01b614a220,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 0.15473339
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b33c5c1b2b6c2a438e02b01b614a220, type: 3}
