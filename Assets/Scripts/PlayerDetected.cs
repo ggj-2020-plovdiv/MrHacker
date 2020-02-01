@@ -23,8 +23,11 @@ public class PlayerDetected : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            SendMessageUpwards("ChasePlayer");
-            parent.GetComponent<GuardBehaviour>().chasing = true;
+            if (!parent.GetComponent<GuardBehaviour>().stunned)
+            {
+                SendMessageUpwards("ChasePlayer");
+                parent.GetComponent<GuardBehaviour>().chasing = true;
+            }
         }
     }
 
@@ -32,8 +35,11 @@ public class PlayerDetected : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            SendMessageUpwards("CheckForDirChange");
-            //parent.GetComponent<GuardBehaviour>().chasing = false;
+            if (!parent.GetComponent<GuardBehaviour>().stunned)
+            {
+                SendMessageUpwards("CheckForDirChange");
+            }
+            parent.GetComponent<GuardBehaviour>().chasing = false;
         }
     }
 }
