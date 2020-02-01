@@ -13,7 +13,7 @@ public class PlayerDetected : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player");
     }
-
+    
     void Update()
     {
 
