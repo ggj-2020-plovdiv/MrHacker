@@ -7,6 +7,7 @@ TagManager:
   - PatrolPoint
   - Enemy
   - Ammo
+  - HidePrompt
   layers:
   - Default
   - TransparentFX

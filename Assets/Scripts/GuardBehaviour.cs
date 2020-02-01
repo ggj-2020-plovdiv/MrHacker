@@ -124,17 +124,4 @@ public class GuardBehaviour : MonoBehaviour
         }
 
     }
-
-    void CheckForDirChange()
-    {
-        var dist = Vector2.Distance(transform.position, player.transform.position);
-        if (dist < 1f)
-        {
-            //transform.Rotate(0, 0, 180);
-        }
-        else
-        {
-            chasing = false;
-        }
-    }
 }
