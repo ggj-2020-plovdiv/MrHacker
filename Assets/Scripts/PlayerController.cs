@@ -12,6 +12,9 @@ public class PlayerController : MonoBehaviour
     public float health;
     public Text healthText;
 
+    public int ammo;
+    public Text ammoText;
+
     public bool canMove = true;
 
     private int timesLeftMoved = 0;
@@ -90,6 +93,11 @@ public class PlayerController : MonoBehaviour
         if (healthText != null)
         {
             healthText.text = $"Health: {health}";
+        }
+
+        if (ammoText != null)
+        {
+            ammoText.text = $"Ammo: {ammo}";
         }
     }
 }
