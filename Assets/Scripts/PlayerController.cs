@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
 
         if (ammoText != null)
         {
-            ammoText.text = $"Ammo: {ammo}";
+            ammoText.text = $"Vases: {ammo}";
         }
 
         Hide();

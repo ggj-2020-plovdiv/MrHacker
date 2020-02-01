@@ -12,15 +12,20 @@ public class Throwable : MonoBehaviour
 
     private GameObject player;
 
+    public GameObject shootPrompt;
+    public GameObject outOfAmmoPrompt;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        shootPrompt.SetActive(false);
     }
 
     void Update()
     {
         if (selectedThrowable && player.GetComponent<PlayerController>().canMove)
         {
+            shootPrompt.SetActive(true);
             if (Input.GetButtonDown("Fire1") && player.GetComponent<PlayerController>().ammo > 0)
             {
                 var foo = Instantiate(go, player.transform.position, Quaternion.identity);
@@ -38,13 +43,24 @@ public class Throwable : MonoBehaviour
                 selectedThrowable = false;
                 Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
                 player.GetComponent<PlayerController>().ammo--;
+                shootPrompt.SetActive(false);
             }
             else if (Input.GetButtonDown("Fire2"))
             {
                 go = null;
                 selectedThrowable = false;
                 Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+                shootPrompt.SetActive(false);
             }
+        }
+
+        if (player.GetComponent<PlayerController>().ammo <= 0)
+        {
+            outOfAmmoPrompt.SetActive(true);
+        }
+        else
+        {
+            outOfAmmoPrompt.SetActive(false);
         }
     }
 
