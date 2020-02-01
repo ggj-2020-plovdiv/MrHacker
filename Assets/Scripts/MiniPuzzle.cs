@@ -16,16 +16,20 @@ public class MiniPuzzle : MonoBehaviour, IPointerClickHandler
 
     int[] angles = new int[4];
 
+    private _boardManager manager;
+
     void Start()
     {
         Roll();
+
+        manager = GameObject.FindGameObjectWithTag("Manager").GetComponent<_boardManager>();
     }
 
     void Update()
     {
-        if (images.All(x => x.gameObject.GetComponent<RectTransform>().rotation.eulerAngles.z == 0))
+        if (images.All(x => (int)x.gameObject.GetComponent<RectTransform>().rotation.eulerAngles.z == 0))
         {
-            Debug.Log("done");
+            manager.puzzleTwoComplete = true;
             Destroy(this.gameObject);
         }
     }
