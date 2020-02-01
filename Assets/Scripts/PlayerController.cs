@@ -87,6 +87,9 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        healthText.text = $"Health: {health}";
+        if (healthText != null)
+        {
+            healthText.text = $"Health: {health}";
+        }
     }
 }
