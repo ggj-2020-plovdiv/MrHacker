@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Dechko.unity
     guid: 81a4e1aedaa32f1408a25bd5ec397822
+  - enabled: 1
+    path: Assets/Scenes/Level1-Floor1.unity
+    guid: 918c33ad85e6bbd40860b6ff84b054ec
   m_configObjects: {}
