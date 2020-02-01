@@ -19,11 +19,15 @@ public class ComputerDetectedPlayer : MonoBehaviour
 
     public Image progressBar;
 
+    private _boardManager manager;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
 
         progressBar.fillAmount = 0f;
+
+        manager = GameObject.FindGameObjectWithTag("Manager").GetComponent<_boardManager>();
     }
 
     void Update()
@@ -58,7 +62,8 @@ public class ComputerDetectedPlayer : MonoBehaviour
 
     void ButtonHeld()
     {
-        Debug.Log("held for " + holdTime + " seconds");
+        progressBar.fillAmount = 0f;
+        manager.puzzleOneComplete = true;
         isComputerHacked = true;
     }
 
