@@ -21,7 +21,7 @@ public class Throwable : MonoBehaviour
     {
         if (selectedThrowable && player.GetComponent<PlayerController>().canMove)
         {
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonDown("Fire1") && player.GetComponent<PlayerController>().ammo > 0)
             {
                 var foo = Instantiate(go, player.transform.position, Quaternion.identity);
                 foo.GetComponent<Rigidbody2D>().AddForce(transform.up * 300f);
@@ -37,6 +37,7 @@ public class Throwable : MonoBehaviour
                 }
                 selectedThrowable = false;
                 Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+                player.GetComponent<PlayerController>().ammo--;
             }
             else if (Input.GetButtonDown("Fire2"))
             {
