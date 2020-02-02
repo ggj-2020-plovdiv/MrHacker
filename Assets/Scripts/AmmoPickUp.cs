@@ -15,6 +15,11 @@ public class AmmoPickUp : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            if (player == null)
+            {
+                player = GameObject.FindGameObjectWithTag("Player");
+            }
+
             player.GetComponent<PlayerController>().ammo++;
             Destroy(this.gameObject);
         }

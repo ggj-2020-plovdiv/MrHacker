@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            anim.SetBool("walking", false);
             BreakStun();
         }
 
