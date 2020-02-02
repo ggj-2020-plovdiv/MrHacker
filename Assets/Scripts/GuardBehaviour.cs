@@ -31,11 +31,15 @@ public class GuardBehaviour : MonoBehaviour
 
     public Animator anim;
 
+    private _boardManager manager;
+
     void Start()
     {
         timeLastAttacked = Time.time;
 
         player = GameObject.FindWithTag("Player");
+
+        manager = GameObject.FindGameObjectWithTag("Manager").GetComponent<_boardManager>();
     }
 
     void FixedUpdate()
@@ -119,7 +123,7 @@ public class GuardBehaviour : MonoBehaviour
             player.GetComponent<PlayerController>().canMove = false;
             if (timeLastAttacked + attackCooldown < Time.time)
             {
-                player.GetComponent<PlayerController>().health -= 10;
+                manager.health -= 10;
                 timeLastAttacked = Time.time;
             }
         }
