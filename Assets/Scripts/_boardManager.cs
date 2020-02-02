@@ -37,7 +37,17 @@ public class _boardManager : MonoBehaviour
 
     void Update()
     {
-        
+        if (health <= 0)
+        {
+            SceneManager.LoadScene("Death");
+            Destroy(gameObject);
+        }
+
+        if (puzzleOneComplete && puzzleTwoComplete && puzzleThreeComplete)
+        {
+            SceneManager.LoadScene("Win");
+            Destroy(gameObject);
+        }
 
         if (puzzleOneComplete)
         {

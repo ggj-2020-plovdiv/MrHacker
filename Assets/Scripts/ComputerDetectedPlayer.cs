@@ -77,7 +77,16 @@ public class ComputerDetectedPlayer : MonoBehaviour
     void ButtonHeld()
     {
         progressBar.fillAmount = 0f;
-        manager.puzzleOneComplete = true;
+
+        if (gameObject.name == "third")
+        {
+            manager.puzzleThreeComplete = true;
+        }
+        else
+        {
+            manager.puzzleOneComplete = true;
+        }
+
         isComputerHacked = true;
     }
 
