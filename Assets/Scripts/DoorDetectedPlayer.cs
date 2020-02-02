@@ -8,25 +8,46 @@ public class DoorDetectedPlayer : MonoBehaviour
 
     public GameObject door2;
     public GameObject player;
-    // Start is called before the first frame update
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
 
-    private void OnTriggerStay2D()
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        //Debug.Log("Player in front of the door.");
-        //Debug.Log("Enter \"y\" to open the door.");
-        if (Input.GetKeyDown("y"))
+        if (player == null)
         {
-            player.transform.position = new Vector2(door2.transform.position.x, door2.transform.position.y - 2.3f);
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
+
+        if (player.GetComponent<PlayerController>().canMove)
+        {
+            if (Input.GetKeyDown("y"))
+            {
+                player.transform.position = new Vector2(door2.transform.position.x, door2.transform.position.y - 2.3f);
+            }
+        }
+
+        if (gameObject.name == "Elevator")
+        {
+            Debug.Log(gameObject);
+            var anim = transform.GetChild(0).GetComponent<Animator>();
+            anim.SetBool("open", true);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (gameObject.name == "Elevator")
+        {
+            var anim = transform.GetChild(0).GetComponent<Animator>();
+            anim.SetBool("open", false);
         }
     }
 }
