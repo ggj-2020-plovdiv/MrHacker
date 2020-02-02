@@ -20,7 +20,7 @@ public class MainMenu : MonoBehaviour
 
     public void EnterInTheGame()
     {
-        SceneManager.LoadScene("Level1-Floor1");
+        SceneManager.LoadScene("Level1");
     }
 
     public void ExitGame()

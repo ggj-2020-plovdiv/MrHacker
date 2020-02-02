@@ -11,6 +11,7 @@ TagManager:
   - Manager
   - Spawn
   - Canvas
+  - Elevator
   layers:
   - Default
   - TransparentFX

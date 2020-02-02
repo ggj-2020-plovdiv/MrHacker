@@ -21,6 +21,8 @@ public class ComputerDetectedPlayer : MonoBehaviour
 
     private _boardManager manager;
 
+    public Animator anim;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -40,7 +42,8 @@ public class ComputerDetectedPlayer : MonoBehaviour
                 timer = startTime;
             }
 
-            if (Input.GetKey("f") && !buttonHeld)
+            player = GameObject.FindGameObjectWithTag("Player");
+            if (Input.GetKey("f") && !buttonHeld && player.GetComponent<PlayerController>().canMove)
             {
                 timer += Time.deltaTime;
 
@@ -52,11 +55,22 @@ public class ComputerDetectedPlayer : MonoBehaviour
                     ButtonHeld();
                 }
             }
+            else
+            {
+                buttonHeld = false;
+                progressBar.fillAmount = 0f;
+            }
 
             if (Input.GetKeyUp("f"))
             {
                 buttonHeld = false;
+                progressBar.fillAmount = 0f;
             }
+        }
+
+        if (isComputerHacked)
+        {
+            anim.SetBool("hacked", true);
         }
     }
 
