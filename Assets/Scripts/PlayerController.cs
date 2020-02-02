@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
             canMove = false;
             if (Input.GetKeyDown("f"))
             {
-                player.GetComponent<PlayerController>().hiding = !player.GetComponent<PlayerController>().hiding;
+                hiding = !hiding;
             }
         }
         else if (!hiding)
