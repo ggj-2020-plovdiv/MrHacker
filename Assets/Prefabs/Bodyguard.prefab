@@ -126,8 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73062009112d0b54ba5b3109182b7033, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseSpeed: 3
-  patrolSpeed: 1
+  chaseSpeed: 5
+  patrolSpeed: 3
   patrolPoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -730,7 +730,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.15473339, y: 0.21073878}
+  m_Size: {x: 0.15473339, y: 0.31261712}
   m_EdgeRadius: 0
 --- !u!114 &9196657099206445885
 MonoBehaviour:
