@@ -368,13 +368,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   verticalSpeed: 0.1
   horizontalSpeed: 0.1
-  health: 100
   healthText: {fileID: 0}
-  ammo: 100
   ammoText: {fileID: 0}
   canMove: 1
   hiding: 0
   anim: {fileID: 0}
+  qwerty: {fileID: 5416803999921649872, guid: 9b4627817a92ccd47844018a7811e82f, type: 3}
 --- !u!50 &1905692888
 Rigidbody2D:
   serializedVersion: 4

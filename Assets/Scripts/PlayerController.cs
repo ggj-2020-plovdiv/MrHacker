@@ -28,6 +28,9 @@ public class PlayerController : MonoBehaviour
 
     private _boardManager manager;
 
+    public GameObject qwerty;
+    private bool qwertySpawned = false;
+
     void Start()
     {
         player = GetComponent<Transform>();
@@ -141,6 +144,12 @@ public class PlayerController : MonoBehaviour
 
     private void BreakStun()
     {
+        if (!qwertySpawned)
+        {
+            Instantiate(qwerty, new Vector2(transform.position.x, transform.position.y + 3f), Quaternion.identity);
+            qwertySpawned = true;
+        }
+
         if (Input.GetKeyDown("o"))
         {
             timesLeftMoved++;
@@ -153,6 +162,8 @@ public class PlayerController : MonoBehaviour
 
         if (timesLeftMoved >= timesRequredToMoveToBreakStun && timesRightMoved >= timesRequredToMoveToBreakStun)
         {
+            qwertySpawned = false;
+
             canMove = true;
             timesLeftMoved = 0;
             timesRightMoved = 0;
