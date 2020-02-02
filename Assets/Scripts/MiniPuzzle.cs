@@ -35,6 +35,7 @@ public class MiniPuzzle : MonoBehaviour, IPointerClickHandler
         if (images.All(x => (int)x.gameObject.GetComponent<RectTransform>().rotation.eulerAngles.z == 0))
         {
             manager.puzzleTwoComplete = true;
+            manager.puzzleActive = false;
             Destroy(this.gameObject);
         }
     }

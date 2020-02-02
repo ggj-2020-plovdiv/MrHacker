@@ -20,6 +20,11 @@ public class _boardManager : MonoBehaviour
     private GameObject spawn;
     private GameObject cam;
 
+    public int ammo;
+    public int health;
+
+    public bool puzzleActive = false;
+
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -37,19 +42,19 @@ public class _boardManager : MonoBehaviour
         if (puzzleOneComplete)
         {
             puzzleOneIcon = GameObject.Find("Task1").GetComponent<Image>();
-            puzzleOneIcon.color = Color.red;
+            puzzleOneIcon.color = Color.white;
         }
 
         if (puzzleTwoComplete)
         {
             puzzleOneIcon = GameObject.Find("Task2").GetComponent<Image>();
-            puzzleOneIcon.color = Color.green;
+            puzzleOneIcon.color = Color.white;
         }
 
         if (puzzleThreeComplete)
         {
             puzzleOneIcon = GameObject.Find("Task3").GetComponent<Image>();
-            puzzleOneIcon.color = Color.blue;
+            puzzleOneIcon.color = Color.white;
         }
     }
 }

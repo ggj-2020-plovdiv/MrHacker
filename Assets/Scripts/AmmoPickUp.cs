@@ -6,9 +6,13 @@ public class AmmoPickUp : MonoBehaviour
 {
     private GameObject player;
 
+    private _boardManager manager;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+
+        manager = GameObject.FindGameObjectWithTag("Manager").GetComponent<_boardManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -20,7 +24,7 @@ public class AmmoPickUp : MonoBehaviour
                 player = GameObject.FindGameObjectWithTag("Player");
             }
 
-            player.GetComponent<PlayerController>().ammo++;
+            manager.ammo++;
             Destroy(this.gameObject);
         }
     }

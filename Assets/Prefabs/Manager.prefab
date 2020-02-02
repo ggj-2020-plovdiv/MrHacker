@@ -49,3 +49,5 @@ MonoBehaviour:
   canvas: {fileID: 4326886862592204289, guid: d61655332a0c2b543b804b46dfc9fbf7, type: 3}
   playerPrefab: {fileID: 6876159285122610647, guid: 894a8e805ee893a44931ccf2f0c2d935,
     type: 3}
+  ammo: 10
+  health: 100

@@ -10,10 +10,8 @@ public class PlayerController : MonoBehaviour
     public float verticalSpeed;
     public float horizontalSpeed;
 
-    public float health;
     public Text healthText;
 
-    public int ammo;
     public Text ammoText;
 
     public bool canMove = true;
@@ -28,6 +26,8 @@ public class PlayerController : MonoBehaviour
 
     public Animator anim;
 
+    private _boardManager manager;
+
     void Start()
     {
         player = GetComponent<Transform>();
@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
         anim = gameObject.GetComponentInChildren<Animator>();
 
         go = this.gameObject;
+
+        manager = GameObject.FindGameObjectWithTag("Manager").GetComponent<_boardManager>();
     }
 
     void FixedUpdate()
@@ -51,7 +53,7 @@ public class PlayerController : MonoBehaviour
 
         if (healthText != null)
         {
-            healthText.text = $"Health: {health}";
+            healthText.text = $"Health: {manager.health}";
         }
         else
         {
@@ -60,7 +62,7 @@ public class PlayerController : MonoBehaviour
 
         if (ammoText != null)
         {
-            ammoText.text = $"Vases: {ammo}";
+            ammoText.text = $"Vases: {manager.ammo}";
         }
         else
         {

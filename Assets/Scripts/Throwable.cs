@@ -15,18 +15,22 @@ public class Throwable : MonoBehaviour
     private float shootTime = 0f;
     private float shootCooldown = 1f;
 
+    private _boardManager manager;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
 
         playerAnimator = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Animator>();
+
+        manager = GameObject.FindGameObjectWithTag("Manager").GetComponent<_boardManager>();
     }
 
     void Update()
     {
-        if (player.GetComponent<PlayerController>().canMove)
+        if (player.GetComponent<PlayerController>().canMove && !manager.puzzleActive)
         {
-            if (Input.GetButtonDown("Fire1") && player.GetComponent<PlayerController>().ammo > 0 && shootTime + shootCooldown <= Time.time)
+            if (Input.GetButtonDown("Fire1") && manager.ammo > 0 && shootTime + shootCooldown <= Time.time)
             {
                 shootTime = Time.time;
                 var foo = Instantiate(vase, player.transform.position, Quaternion.identity);
@@ -41,13 +45,13 @@ public class Throwable : MonoBehaviour
                 {
                     foo.GetComponent<Rigidbody2D>().AddForce(transform.right * 200f);
                 }
-                player.GetComponent<PlayerController>().ammo--;
+                manager.ammo--;
                 playerAnimator.Play("hacker_throw");
             }
         }
 
         player = GameObject.FindGameObjectWithTag("Player");
-        if (player.GetComponent<PlayerController>().ammo <= 0)
+        if (manager.ammo <= 0)
         {
             outOfAmmoPrompt.SetActive(true);
         }
